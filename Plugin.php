@@ -3,10 +3,10 @@
  * 评论通知推送多服务
  *
  * @package CommentPush
- * @author 高彬展,奥秘Sir
- * @version 1.7.1
- * @link https://github.com/gaobinzhan/CommentPush
- * @blog https://blog.gaobinzhan.com
+ * @author 知命
+ * @version 1.7.2
+ * @link https://github.com/zkysimon/CommentPush
+ * @blog https://zky.gs
  */
 
 require 'lib/QQService.php';
@@ -118,14 +118,14 @@ class CommentPush_Plugin implements Typecho_Plugin_Interface
         $form->addItem($serviceTitle);
 
         $services = new Typecho_Widget_Helper_Form_Element_Checkbox('services', [
-            "QQService" => _t('Qmsg酱'),
+            "QQService" => _t('tg推送'),
             "WeChatService" => _t('Server酱'),
             "AliYunEmailService" => _t('阿里云邮件'),
             "SmtpService" => _t('SMTP'),
             "DingTalkBotService" => _t('钉钉机器人'),
             "EnterpriseWeChatService" => _t('企业微信机器人'),
             "OfficialAccountService" => _t('微信公众号')
-        ], 'services', _t('推送服务 多选同时推送'), _t('插件作者：<a href="https://blog.gaobinzhan.com">高彬展</a>&nbsp;<a href="https://blog.say521.cn/">奥秘Sir</a>'));
+        ], 'services', _t('推送服务 多选同时推送'));
         $form->addInput($services->addRule('required', _t('必须选择一项推送服务')));
 
         $isPushBlogger = new Typecho_Widget_Helper_Form_Element_Radio('isPushBlogger', [
@@ -161,13 +161,13 @@ class CommentPush_Plugin implements Typecho_Plugin_Interface
     private static function qqService(Typecho_Widget_Helper_Form $form)
     {
         $qqServiceTitle = new Typecho_Widget_Helper_Layout('div', ['class=' => 'typecho-page-title']);
-        $qqServiceTitle->html('<h2>Qmsg酱配置</h2>');
+        $qqServiceTitle->html('<h2>tg推送配置</h2>');
         $form->addItem($qqServiceTitle);
 
-        $qqApiUrl = new Typecho_Widget_Helper_Form_Element_Text('qqApiUrl', NULL, NULL, _t('Qmsg酱接口'), _t("当选择Qmsg酱必须填写"));
+        $qqApiUrl = new Typecho_Widget_Helper_Form_Element_Text('qqApiUrl', NULL, NULL, _t('tg bot token'), _t("tg关注@BotFather，创建并获取token。"));
         $form->addInput($qqApiUrl);
 
-        $receiveQq = new Typecho_Widget_Helper_Form_Element_Text('receiveQq', NULL, NULL, _t('接收消息的QQ，可以添加多个，以英文逗号分割'), _t("当选择Qmsg酱必须填写（指定的QQ必须在您的QQ号列表中）"));
+        $receiveQq = new Typecho_Widget_Helper_Form_Element_Text('receiveQq', NULL, NULL, _t('接收消息的tg用户id'), _t("tg关注@userinfobot，发送/start 获取自己的id。"));
         $form->addInput($receiveQq);
     }
 
