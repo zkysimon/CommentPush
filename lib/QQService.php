@@ -1,6 +1,6 @@
 <?php
 /**
- * @author gaobinzhan <gaobinzhan@gmail.com>
+ * @author 知命 <push@ovo.gs>
  */
 
 require_once 'Service.php';
@@ -23,14 +23,16 @@ class QQService extends Service
             $link = $active->permalink;
             $context = $comment['text'];
 
-            $template = '标题：' . $title . PHP_EOL
+            $template = 
+                '有人给你评论啦！！' . PHP_EOL
+                . '标题：' . $title . PHP_EOL
                 . '评论人：' . $author . " [{$comment['ip']}]" . PHP_EOL
                 . '评论内容：' . $context . PHP_EOL
                 . '链接：' . $link . '#comment-' . $comment['coid'];
 
             $params = [
-                'qq' => $receiveQq,
-                'msg' => $template
+                'chat_id' => $receiveQq ,
+                'text' => $template
             ];
 
             $context = stream_context_create([
@@ -41,7 +43,7 @@ class QQService extends Service
                 ]
             ]);
 
-            $result = file_get_contents($qqApiUrl, false, $context);
+            $result = file_get_contents('https://api.telegram.org/bot' . $qqApiUrl. '/sendMessage', false, $context);
             self::logger(__CLASS__, $receiveQq, $params, $result);
         } catch (\Exception $exception) {
             self::logger(__CLASS__, '', '', '', $exception->getMessage());
