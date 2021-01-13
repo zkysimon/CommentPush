@@ -118,7 +118,7 @@ class CommentPush_Plugin implements Typecho_Plugin_Interface
         $form->addItem($serviceTitle);
 
         $services = new Typecho_Widget_Helper_Form_Element_Checkbox('services', [
-            "QQService" => _t('tg推送'),
+            "QQService" => _t('tg机器人'),
             "WeChatService" => _t('Server酱'),
             "AliYunEmailService" => _t('阿里云邮件'),
             "SmtpService" => _t('SMTP'),
@@ -155,13 +155,13 @@ class CommentPush_Plugin implements Typecho_Plugin_Interface
     }
 
     /**
-     * Qmsg酱配置面板
+     * tg机器人配置面板
      * @param Typecho_Widget_Helper_Form $form
      */
     private static function qqService(Typecho_Widget_Helper_Form $form)
     {
         $qqServiceTitle = new Typecho_Widget_Helper_Layout('div', ['class=' => 'typecho-page-title']);
-        $qqServiceTitle->html('<h2>tg推送配置</h2>');
+        $qqServiceTitle->html('<h2>tg机器人配置</h2>');
         $form->addItem($qqServiceTitle);
 
         $qqApiUrl = new Typecho_Widget_Helper_Form_Element_Text('qqApiUrl', NULL, NULL, _t('tg bot token'), _t("tg关注@BotFather，创建并获取token。"));
